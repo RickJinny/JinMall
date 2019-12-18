@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class UserInfoDao {
 
     @Autowired
-    UserInfoMapper userInfoMapper;
+    private UserInfoMapper userInfoMapper;
 
     public UserInfo getUserInfo() {
         return userInfoMapper.getUserInfo();
