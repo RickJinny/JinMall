@@ -18,4 +18,12 @@ public class UserInfoDao {
     public void addUserInfo(UserInfo userInfo) {
         userInfoMapper.insertUserInfo(userInfo);
     }
+
+    public void updateUserInfo(UserInfo userInfo) {
+        userInfoMapper.updateUserInfo(userInfo);
+    }
+
+    public UserInfo getUserInfoById(int id) {
+        return userInfoMapper.getUserInfoById(id);
+    }
 }

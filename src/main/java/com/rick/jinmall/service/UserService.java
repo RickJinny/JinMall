@@ -8,4 +8,8 @@ public interface UserService {
     UserInfo getUserInfo();
 
     void addUserInfo(UserInfo userInfo);
+
+    void updateUserInfo(UserInfo userInfo);
+
+    UserInfo getUserInfoById(int id);
 }
