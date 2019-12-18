@@ -14,4 +14,13 @@ public interface UserInfoMapper {
      */
     void insertUserInfo(UserInfo userInfo);
 
+    /**
+     * 更新用户信息
+     */
+    void updateUserInfo(UserInfo userInfo);
+
+    /**
+     * 根据用户id，查找用户信息
+     */
+    UserInfo getUserInfoById(int id);
 }
