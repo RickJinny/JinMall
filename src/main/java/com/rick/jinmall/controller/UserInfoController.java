@@ -23,4 +23,10 @@ public class UserInfoController {
         }
         return userInfo;
     }
+
+    @RequestMapping(value = "/registerUser")
+    @ResponseBody
+    public void registerUser(UserInfo userInfo) {
+        userService.addUserInfo(userInfo);
+    }
 }

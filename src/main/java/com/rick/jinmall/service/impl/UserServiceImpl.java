@@ -16,4 +16,9 @@ public class UserServiceImpl implements UserService {
     public UserInfo getUserInfo() {
         return userInfoDao.getUserInfo();
     }
+
+    @Override
+    public void addUserInfo(UserInfo userInfo) {
+        userInfoDao.addUserInfo(userInfo);
+    }
 }

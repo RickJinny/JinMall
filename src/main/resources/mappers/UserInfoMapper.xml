@@ -8,6 +8,8 @@
         insert into tb_user(name,sex,age,password,birthday,account,user_phone,address,user_wechat,user_qq,user_email)
         value(#{name},#{sex},#{age},#{password},#{birthday},#{account},#{user_phone},#{address},#{user_wechat},#{user_qq},#{user_email})
     </insert>
+
+
     <select id="getUserInfo" resultType="com.rick.jinmall.bean.UserInfo">
         select name, age, password from tb_user;
     </select>

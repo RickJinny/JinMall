@@ -14,4 +14,8 @@ public class UserInfoDao {
     public UserInfo getUserInfo() {
         return userInfoMapper.getUserInfo();
     }
+
+    public void addUserInfo(UserInfo userInfo) {
+        userInfoMapper.insertUserInfo(userInfo);
+    }
 }

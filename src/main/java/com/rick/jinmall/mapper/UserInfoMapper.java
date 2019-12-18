@@ -12,6 +12,6 @@ public interface UserInfoMapper {
     /**
      * 增加用户信息
      */
-    void insertUserInfo();
+    void insertUserInfo(UserInfo userInfo);
 
 }

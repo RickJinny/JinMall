@@ -6,4 +6,6 @@ import com.rick.jinmall.bean.UserInfo;
 public interface UserService {
 
     UserInfo getUserInfo();
+
+    void addUserInfo(UserInfo userInfo);
 }
