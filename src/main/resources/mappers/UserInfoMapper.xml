@@ -12,10 +12,54 @@
         update tb_user set name = #{name}, age = #{age}, birthday = #{birthday}, account = #{account},address = #{address},
         user_qq = #{userQQ}, user_wechat = #{userWeChat}, user_email = #{userEmail} where id = #{id}
     </update>
+    <delete id="deleteUserInfoById" parameterType="int">
+        delete from tb_user where id = #{id}
+    </delete>
     <select id="getUserInfo" resultType="com.rick.jinmall.bean.UserInfo">
         select name, age, password from tb_user;
     </select>
     <select id="getUserInfoById" parameterType="int" resultType="com.rick.jinmall.bean.UserInfo">
         select * from tb_user where id = #{value};
     </select>
+    <select id="queryUserInfo" parameterType="com.rick.jinmall.bean.UserInfoVo"
+            resultType="com.rick.jinmall.bean.UserInfo">
+        select * from tb_user
+        <where>
+            <include refid="customSQL"></include>
+        </where>
+    </select>
+    <sql id="customSQL" >
+        <if test="customUser != null">
+            <if test="customUser.name != null and customUser.name != ''">
+                and name = "${constomUser.name}"
+            </if>
+            <if test="customUser.age != null and customUser.age != '' ">
+                and age = "${constomUser.age}"
+            </if>
+            <if test="customUser.address != null and customUser.address != '' ">
+                and address = "${constomUser.address}"
+            </if>
+            <if test="customUser.userPhone != null and customUser.userPhone != '' ">
+                and user_phone = "${constomUser.userPhone}"
+            </if>
+            <if test="customUser.userQQ != null and customUser.userQQ != '' ">
+                and user_qq = "${constomUser.userQQ}"
+            </if>
+            <if test="customUser.userWeChat != null and customUser.userWeChat != '' ">
+                and user_wechat = "${constomUser.userWeChat}"
+            </if>
+            <if test="customUser.userEmail != null and customUser.userEmail != '' ">
+                and user_email = "${constomUser.userEmail}"
+            </if>
+            <if test="customUser.sex != null and customUser.sex != '' ">
+                and sex = "${constomUser.sex}"
+            </if>
+            <if test="customUser.birthday != null and customUser.birthday != '' ">
+                and birthday = "${constomUser.birthday}"
+            </if>
+            <if test="customUser.account != null and customUser.account != '' ">
+                and account = "${constomUser.account}"
+            </if>
+        </if>
+    </sql>
 </mapper>

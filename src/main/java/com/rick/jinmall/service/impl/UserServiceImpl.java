@@ -1,10 +1,13 @@
 package com.rick.jinmall.service.impl;
 
 import com.rick.jinmall.bean.UserInfo;
+import com.rick.jinmall.bean.UserInfoVo;
 import com.rick.jinmall.dao.UserInfoDao;
 import com.rick.jinmall.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -30,5 +33,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserInfo getUserInfoById(int id) {
         return userInfoDao.getUserInfoById(id);
+    }
+
+    @Override
+    public List<UserInfo> queryUserInfo(UserInfoVo userInfoVo) {
+        return userInfoDao.queryUserInfo(userInfoVo);
+    }
+
+    @Override
+    public void deleteUserInfoById(int id) {
+        userInfoDao.deleteUserInfoById(id);
     }
 }

@@ -1,6 +1,9 @@
 package com.rick.jinmall.mapper;
 
 import com.rick.jinmall.bean.UserInfo;
+import com.rick.jinmall.bean.UserInfoVo;
+
+import java.util.List;
 
 public interface UserInfoMapper {
 
@@ -23,4 +26,14 @@ public interface UserInfoMapper {
      * 根据用户id，查找用户信息
      */
     UserInfo getUserInfoById(int id);
+
+    /**
+     * 查询用户信息
+     */
+    List<UserInfo> queryUserInfo(UserInfoVo userInfoVo);
+
+    /**
+     * 删除信息
+     */
+    void deleteUserInfoById(int id);
 }
