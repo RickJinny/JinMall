@@ -33,10 +33,10 @@ public class UserInfoController {
 
     @RequestMapping(value = "/updateUserInfo")
     @ResponseBody
-    public String updateUserInfo(UserInfo userInfo, Model model) {
+    public void updateUserInfo(int id, Model model) {
+        UserInfo userInfo = userService.getUserInfoById(id);
         userService.updateUserInfo(userInfo);
         model.addAttribute("userInfo", userInfo);
-        return "success";
     }
 
     @RequestMapping(value = "/getUserInfoById")

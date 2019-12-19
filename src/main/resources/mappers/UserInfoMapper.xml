@@ -6,11 +6,11 @@
             select LAST_INSERT_ID()
         </selectKey>
         insert into tb_user(name,sex,age,password,birthday,account,user_phone,address,user_wechat,user_qq,user_email)
-        value(#{name},#{sex},#{age},#{password},#{birthday},#{account},#{user_phone},#{address},#{user_wechat},#{user_qq},#{user_email})
+        value(#{name},#{sex},#{age},#{password},#{birthday},#{account},#{userPhone},#{address},#{userWeChat},#{userQQ},#{userEmail})
     </insert>
     <update id="updateUserInfo" parameterType="com.rick.jinmall.bean.UserInfo">
         update tb_user set name = #{name}, age = #{age}, birthday = #{birthday}, account = #{account},address = #{address},
-        user_qq = #{user_qq}, user_wechat = #{user_wechat}, user_email = #{user_email} where id = #{id}
+        user_qq = #{userQQ}, user_wechat = #{userWeChat}, user_email = #{userEmail} where id = #{id}
     </update>
     <select id="getUserInfo" resultType="com.rick.jinmall.bean.UserInfo">
         select name, age, password from tb_user;
