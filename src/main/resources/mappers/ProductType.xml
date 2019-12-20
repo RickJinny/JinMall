@@ -15,9 +15,31 @@
     <select id="getProductType"  resultType="com.rick.jinmall.bean.product.ProductType">
         select * from tb_product_type;
     </select>
-
     <update id="updateProductTypeById" parameterType="com.rick.jinmall.bean.product.ProductType">
         update tb_product_type set product_type_name = #{productTypeName},
         product_type_desc=#{productTypeDesc} where id=#{id}
     </update>
+    <select id="queryListByProductVo" parameterType="com.rick.jinmall.bean.product.ProductType"
+            resultType="com.rick.jinmall.bean.product.ProductType">
+        select * from tb_product_type
+        <where>
+            <include refid="customSQL"></include>
+        </where>
+    </select>
+    <sql id="customSQL" >
+        <if test="customProductType != null">
+            <if test="customProductType.productTypeName != null and customProductType.productTypeName != ''">
+                and product_type_name = "${customProductType.productTypeName}"
+            </if>
+            <if test="customProductType.productTypeDesc != null and customProductType.productTypeDesc != '' ">
+                and product_type_desc = "${customProductType.productTypeDesc}"
+            </if>
+            <if test="customProductType.productTypeLevel != null and customProductType.productTypeLevel != '' ">
+                and product_type_level = "${customProductType.productTypeLevel}"
+            </if>
+            <if test="customProductType.parentId != null and customProductType.parentId != '' ">
+                and parent_id = "${customProductType.parentId}"
+            </if>
+        </if>
+    </sql>
 </mapper>
