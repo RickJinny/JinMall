@@ -10,9 +10,8 @@
         value(#{productTypeName}, #{productTypeDesc}, #{productTypeLevel}, #{parentId})
     </insert>
     <select id="getProductTypeById" parameterType="int" resultType="com.rick.jinmall.bean.product.ProductType">
-        select * from tb_product_type where id = #{value}
+        select * from tb_product_type where id = #{id}
     </select>
-
     <select id="getProductType"  resultType="com.rick.jinmall.bean.product.ProductType">
         select * from tb_product_type;
     </select>
