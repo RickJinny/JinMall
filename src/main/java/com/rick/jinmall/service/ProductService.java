@@ -1,6 +1,7 @@
 package com.rick.jinmall.service;
 
 import com.rick.jinmall.bean.product.ProductType;
+import com.rick.jinmall.bean.product.ProductTypeVo;
 
 import java.util.List;
 
@@ -13,4 +14,6 @@ public interface ProductService {
     List<ProductType> getProductType();
 
     void updateProductTypeById(ProductType productType);
+
+    List<ProductType> queryListByProductVo(ProductTypeVo productTypeVo);
 }

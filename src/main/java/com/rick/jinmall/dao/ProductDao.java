@@ -1,6 +1,7 @@
 package com.rick.jinmall.dao;
 
 import com.rick.jinmall.bean.product.ProductType;
+import com.rick.jinmall.bean.product.ProductTypeVo;
 import com.rick.jinmall.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,5 +28,9 @@ public class ProductDao {
 
     public void updateProductTypeById(ProductType productType){
         productMapper.updateProductTypeById(productType);
+    }
+
+    public List<ProductType> queryListByProductVo(ProductTypeVo productTypeVo) {
+        return productMapper.queryListByProductVo(productTypeVo);
     }
 }

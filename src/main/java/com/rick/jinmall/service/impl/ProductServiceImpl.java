@@ -1,6 +1,7 @@
 package com.rick.jinmall.service.impl;
 
 import com.rick.jinmall.bean.product.ProductType;
+import com.rick.jinmall.bean.product.ProductTypeVo;
 import com.rick.jinmall.dao.ProductDao;
 import com.rick.jinmall.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void updateProductTypeById(ProductType productType){
         productDao.updateProductTypeById(productType);
+    }
+
+    @Override
+    public List<ProductType> queryListByProductVo(ProductTypeVo productTypeVo) {
+        return productDao.queryListByProductVo(productTypeVo);
     }
 }

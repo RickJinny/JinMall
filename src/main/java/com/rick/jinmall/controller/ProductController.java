@@ -1,6 +1,7 @@
 package com.rick.jinmall.controller;
 
 import com.rick.jinmall.bean.product.ProductType;
+import com.rick.jinmall.bean.product.ProductTypeVo;
 import com.rick.jinmall.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,5 +39,11 @@ public class ProductController {
     @ResponseBody
     public void updateProductTypeById(ProductType productType){
         productService.updateProductTypeById(productType);
+    }
+
+    @RequestMapping(value = "/queryListByProductVo")
+    @ResponseBody
+    public List<ProductType> queryListByProductVo(ProductTypeVo productTypeVo) {
+        return productService.queryListByProductVo(productTypeVo);
     }
 }
