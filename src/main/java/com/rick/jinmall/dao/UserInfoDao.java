@@ -1,7 +1,7 @@
 package com.rick.jinmall.dao;
 
-import com.rick.jinmall.bean.UserInfo;
-import com.rick.jinmall.bean.UserInfoVo;
+import com.rick.jinmall.bean.user.UserInfo;
+import com.rick.jinmall.bean.user.UserInfoVo;
 import com.rick.jinmall.mapper.UserInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

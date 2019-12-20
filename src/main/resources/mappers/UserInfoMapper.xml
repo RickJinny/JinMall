@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rick.jinmall.mapper.UserInfoMapper">
-    <insert id="insertUserInfo" parameterType="com.rick.jinmall.bean.UserInfo">
+    <insert id="insertUserInfo" parameterType="com.rick.jinmall.bean.user.UserInfo">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
             select LAST_INSERT_ID()
         </selectKey>
         insert into tb_user(name,sex,age,password,birthday,account,user_phone,address,user_wechat,user_qq,user_email)
         value(#{name},#{sex},#{age},#{password},#{birthday},#{account},#{userPhone},#{address},#{userWeChat},#{userQQ},#{userEmail})
     </insert>
-    <update id="updateUserInfo" parameterType="com.rick.jinmall.bean.UserInfo">
+    <update id="updateUserInfo" parameterType="com.rick.jinmall.bean.user.UserInfo">
         update tb_user set name = #{name}, age = #{age}, birthday = #{birthday}, account = #{account},address = #{address},
         user_qq = #{userQQ}, user_wechat = #{userWeChat}, user_email = #{userEmail} where id = #{id}
     </update>
     <delete id="deleteUserInfoById" parameterType="int">
         delete from tb_user where id = #{id}
     </delete>
-    <select id="getUserInfo" resultType="com.rick.jinmall.bean.UserInfo">
+    <select id="getUserInfo" resultType="com.rick.jinmall.bean.user.UserInfo">
         select name, age, password from tb_user;
     </select>
-    <select id="getUserInfoById" parameterType="int" resultType="com.rick.jinmall.bean.UserInfo">
+    <select id="getUserInfoById" parameterType="int" resultType="com.rick.jinmall.bean.user.UserInfo">
         select * from tb_user where id = #{value};
     </select>
-    <select id="queryUserInfo" parameterType="com.rick.jinmall.bean.UserInfoVo"
-            resultType="com.rick.jinmall.bean.UserInfo">
+    <select id="queryUserInfo" parameterType="com.rick.jinmall.bean.user.UserInfoVo"
+            resultType="com.rick.jinmall.bean.user.UserInfo">
         select * from tb_user
         <where>
             <include refid="customSQL"></include>

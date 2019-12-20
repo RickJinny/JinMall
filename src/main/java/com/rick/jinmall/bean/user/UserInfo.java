@@ -1,4 +1,4 @@
-package com.rick.jinmall.bean;
+package com.rick.jinmall.bean.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,7 +1,7 @@
 package com.rick.jinmall.service;
 
-import com.rick.jinmall.bean.UserInfo;
-import com.rick.jinmall.bean.UserInfoVo;
+import com.rick.jinmall.bean.user.UserInfo;
+import com.rick.jinmall.bean.user.UserInfoVo;
 
 import java.util.List;
 

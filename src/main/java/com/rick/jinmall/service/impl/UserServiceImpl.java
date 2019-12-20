@@ -1,7 +1,7 @@
 package com.rick.jinmall.service.impl;
 
-import com.rick.jinmall.bean.UserInfo;
-import com.rick.jinmall.bean.UserInfoVo;
+import com.rick.jinmall.bean.user.UserInfo;
+import com.rick.jinmall.bean.user.UserInfoVo;
 import com.rick.jinmall.dao.UserInfoDao;
 import com.rick.jinmall.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    UserInfoDao userInfoDao;
+    private UserInfoDao userInfoDao;
 
     @Override
     public UserInfo getUserInfo() {

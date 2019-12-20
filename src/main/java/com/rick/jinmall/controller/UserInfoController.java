@@ -1,7 +1,7 @@
 package com.rick.jinmall.controller;
 
-import com.rick.jinmall.bean.UserInfo;
-import com.rick.jinmall.bean.UserInfoVo;
+import com.rick.jinmall.bean.user.UserInfo;
+import com.rick.jinmall.bean.user.UserInfoVo;
 import com.rick.jinmall.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,7 @@ import java.util.List;
 public class UserInfoController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @RequestMapping(value = "/getUserInfo")
     @ResponseBody
