@@ -1,16 +1,16 @@
 package com.rick.jinmall.mapper;
 
-import com.rick.jinmall.bean.product.ProductCategory;
+import com.rick.jinmall.bean.product.ProductType;
 
 import java.util.List;
 
 public interface ProductMapper {
 
-    void addProductType(ProductCategory productCategory);
+    void addProductType(ProductType productType);
 
-    ProductCategory getProductTypeById(int id);
+    ProductType getProductTypeById(int id);
 
-    List<ProductCategory> getProductType();
+    List<ProductType> getProductType();
 
-    void updateProductTypeById(ProductCategory productCategory);
+    void updateProductTypeById(ProductType productType);
 }

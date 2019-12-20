@@ -1,6 +1,6 @@
 package com.rick.jinmall.controller;
 
-import com.rick.jinmall.bean.product.ProductCategory;
+import com.rick.jinmall.bean.product.ProductType;
 import com.rick.jinmall.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,25 +18,25 @@ public class ProductController {
 
     @RequestMapping(value = "/addProductType")
     @ResponseBody
-    public void addProductType(ProductCategory productCategory) {
-        productService.addProductType(productCategory);
+    public void addProductType(ProductType productType) {
+        productService.addProductType(productType);
     }
 
     @RequestMapping(value = "/getProductTypeById")
     @ResponseBody
-    public ProductCategory getProductTypeById(int id){
+    public ProductType getProductTypeById(int id){
         return productService.getProductTypeById(id);
     }
 
     @RequestMapping(value = "/getProductType")
     @ResponseBody
-    public List<ProductCategory> getProductType(){
+    public List<ProductType> getProductType(){
         return productService.getProductType();
     }
 
     @RequestMapping(value = "/updateProductTypeById")
     @ResponseBody
-    public void updateProductTypeById(ProductCategory productCategory){
-        productService.updateProductTypeById(productCategory);
+    public void updateProductTypeById(ProductType productType){
+        productService.updateProductTypeById(productType);
     }
 }

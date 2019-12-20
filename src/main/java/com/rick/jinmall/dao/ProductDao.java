@@ -1,6 +1,6 @@
 package com.rick.jinmall.dao;
 
-import com.rick.jinmall.bean.product.ProductCategory;
+import com.rick.jinmall.bean.product.ProductType;
 import com.rick.jinmall.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,19 +13,19 @@ public class ProductDao {
     @Autowired
     private ProductMapper productMapper;
 
-    public void addProductType(ProductCategory productCategory) {
-        productMapper.addProductType(productCategory);
+    public void addProductType(ProductType productType) {
+        productMapper.addProductType(productType);
     }
 
-    public ProductCategory getProductTypeById(int id){
+    public ProductType getProductTypeById(int id){
         return productMapper.getProductTypeById(id);
     }
 
-    public List<ProductCategory> getProductType(){
+    public List<ProductType> getProductType(){
         return productMapper.getProductType();
     }
 
-    public void updateProductTypeById(ProductCategory productCategory){
-        productMapper.updateProductTypeById(productCategory);
+    public void updateProductTypeById(ProductType productType){
+        productMapper.updateProductTypeById(productType);
     }
 }

@@ -2,22 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rick.jinmall.mapper.ProductMapper">
 
-    <insert id="addProductType" parameterType="com.rick.jinmall.bean.product.ProductCategory">
+    <insert id="addProductType" parameterType="com.rick.jinmall.bean.product.ProductType">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        insert into tb_product_category(product_type_name, product_type_desc, product_type_level, parent_id)
-        value(#{producttypename},#{producttypedescription},#{typegrade},#{parentid})
+        insert into tb_product_type(product_type_name, product_type_desc, product_type_level, parent_id)
+        value(#{productTypeName}, #{productTypeDesc}, #{productTypeLevel}, #{parentId})
     </insert>
-    <select id="getProductTypeById" parameterType="int" resultType="com.rick.jinmall.bean.product.ProductCategory">
-        select * from tb_product_category where id = #{value}
+    <select id="getProductTypeById" parameterType="int" resultType="com.rick.jinmall.bean.product.ProductType">
+        select * from tb_product_type where id = #{value}
     </select>
 
-    <select id="getProductType"  resultType="com.rick.jinmall.bean.product.ProductCategory">
-        select * from tb_product_category;
+    <select id="getProductType"  resultType="com.rick.jinmall.bean.product.ProductType">
+        select * from tb_product_type;
     </select>
 
-    <update id="updateProductTypeById" parameterType="com.rick.jinmall.bean.product.ProductCategory">
-        update tb_product_category set product_type_name = #{producttypename},product_type_desc=#{producttypedescription} where id=#{id}
+    <update id="updateProductTypeById" parameterType="com.rick.jinmall.bean.product.ProductType">
+        update tb_product_type set product_type_name = #{productTypeName},
+        product_type_desc=#{productTypeDesc} where id=#{id}
     </update>
 </mapper>
