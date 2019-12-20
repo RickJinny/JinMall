@@ -39,4 +39,9 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductType> queryListByProductVo(ProductTypeVo productTypeVo) {
         return productDao.queryListByProductVo(productTypeVo);
     }
+
+    @Override
+    public void deleteProductTypeById(int id) {
+        productDao.deleteProductTypeById(id);
+    }
 }

@@ -46,4 +46,10 @@ public class ProductController {
     public List<ProductType> queryListByProductVo(ProductTypeVo productTypeVo) {
         return productService.queryListByProductVo(productTypeVo);
     }
+
+    @RequestMapping(value = "/deleteProductTypeById")
+    @ResponseBody
+    public void deleteProductTypeById(int id) {
+        productService.deleteProductTypeById(id);
+    }
 }

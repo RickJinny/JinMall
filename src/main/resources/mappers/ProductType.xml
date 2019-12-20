@@ -9,6 +9,9 @@
         insert into tb_product_type(product_type_name, product_type_desc, product_type_level, parent_id)
         value(#{productTypeName}, #{productTypeDesc}, #{productTypeLevel}, #{parentId})
     </insert>
+    <delete id="deleteProductTypeById" parameterType="int">
+        delete from tb_product_type where id = #{id}
+    </delete>
     <select id="getProductTypeById" parameterType="int" resultType="com.rick.jinmall.bean.product.ProductType">
         select * from tb_product_type where id = #{id}
     </select>
