@@ -4,7 +4,7 @@ import com.rick.jinmall.bean.product.ProductDetail;
 
 public interface ProductDetailService {
 
-    int addProductDetail(ProductDetail productDetail);
+    void addProductDetail(ProductDetail productDetail);
 
     ProductDetail getProductDetailById(int productId);
 }
