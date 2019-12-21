@@ -51,7 +51,7 @@
 
     </select>
     <select id="queryProductByIds" resultType="com.rick.jinmall.bean.product.Product">
-        
+
     </select>
     <sql id="customSQL" >
         <if test="customProductType != null">
