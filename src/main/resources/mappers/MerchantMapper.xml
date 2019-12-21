@@ -3,4 +3,23 @@
 <mapper namespace="com.rick.jinmall.mapper.MerchantMapper">
 
 
+    <insert id="addMerchant" parameterType="com.rick.jinmall.bean.merchant.Merchant">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into tb_merchant(merchant_name, merchant_shop_name, merchant_account, merchant_password, merchant_scope, audit_status, sold_out)
+        value(#{merchantName}, #{merchantShopName}, #{merchantAccount}, #{merchantPassword}, #{merchantScope}, #{auditStatus}, #{soldOut})
+    </insert>
+    <update id="updateMerchant" parameterType="com.rick.jinmall.bean.merchant.Merchant">
+        update tb_merchant set merchant_shop_name = #{merchantShopName}, merchant_scope = #{merchantScope} where id = #{id}
+    </update>
+    <update id="updateMerchantAuditStatus" parameterType="com.rick.jinmall.bean.merchant.Merchant">
+        update tb_merchant set audit_status=#{auditStatus} where id = #{id}
+    </update>
+    <update id="updateMerchantSoldOut" parameterType="com.rick.jinmall.bean.merchant.Merchant">
+        update tb_merchant set sold_out = #{soldOut} where id = #{id}
+    </update>
+    <select id="getMerchantById" parameterType="int" resultType="com.rick.jinmall.bean.merchant.Merchant">
+        select * from tb_merchant where id = #{id}
+    </select>
 </mapper>
