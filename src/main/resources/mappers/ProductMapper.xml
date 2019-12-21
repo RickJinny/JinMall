@@ -9,8 +9,14 @@
         insert into tb_product_type(product_type_name, product_type_desc, product_type_level, parent_id)
         value(#{productTypeName}, #{productTypeDesc}, #{productTypeLevel}, #{parentId})
     </insert>
+    <insert id="addProduct">
+
+    </insert>
     <delete id="deleteProductTypeById" parameterType="int">
         delete from tb_product_type where id = #{id}
+    </delete>
+    <delete id="deleteProductById">
+
     </delete>
     <select id="getProductTypeById" parameterType="int" resultType="com.rick.jinmall.bean.product.ProductType">
         select * from tb_product_type where id = #{id}
@@ -22,12 +28,30 @@
         update tb_product_type set product_type_name = #{productTypeName},
         product_type_desc=#{productTypeDesc} where id=#{id}
     </update>
+    <update id="auditProduct">
+
+    </update>
+    <update id="updateProduct">
+
+    </update>
+    <update id="updateProductByStatus">
+
+    </update>
     <select id="queryListByProductVo" parameterType="com.rick.jinmall.bean.product.ProductType"
             resultType="com.rick.jinmall.bean.product.ProductType">
         select * from tb_product_type
         <where>
             <include refid="customSQL"></include>
         </where>
+    </select>
+    <select id="getProductById" resultType="com.rick.jinmall.bean.product.Product">
+
+    </select>
+    <select id="queryProductByVo" resultType="com.rick.jinmall.bean.product.Product">
+
+    </select>
+    <select id="queryProductByIds" resultType="com.rick.jinmall.bean.product.Product">
+        
     </select>
     <sql id="customSQL" >
         <if test="customProductType != null">
