@@ -10,7 +10,7 @@ public interface MerchantService {
 
     Merchant getMerchantById(int id);
 
-    void updateMerchantAuditStatus(Merchant merchant);
+    void updateMerchantAuditStatus(int id, int auditStatus);
 
-    void updateMerchantSoldOut(Merchant merchant);
+    void updateMerchantSoldOut(int id, int soldOut);
 }

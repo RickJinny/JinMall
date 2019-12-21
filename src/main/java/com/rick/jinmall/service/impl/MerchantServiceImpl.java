@@ -14,11 +14,14 @@ public class MerchantServiceImpl implements MerchantService {
 
     @Override
     public void addMerchant(Merchant merchant) {
+        merchant.setAuditStatus(1);
+        merchant.setSoldOut(1);
         merchantDao.addMerchant(merchant);
     }
 
     @Override
     public void updateMerchant(Merchant merchant) {
+        merchant.setSoldOut(1);
         merchantDao.updateMerchant(merchant);
     }
 
@@ -28,12 +31,18 @@ public class MerchantServiceImpl implements MerchantService {
     }
 
     @Override
-    public void updateMerchantAuditStatus(Merchant merchant) {
+    public void updateMerchantAuditStatus(int id, int auditStatus) {
+        Merchant merchant = new Merchant();
+        merchant.setId(id);
+        merchant.setAuditStatus(auditStatus);
         merchantDao.updateMerchantAuditStatus(merchant);
     }
 
     @Override
-    public void updateMerchantSoldOut(Merchant merchant) {
+    public void updateMerchantSoldOut(int id, int soldOut) {
+        Merchant merchant = new Merchant();
+        merchant.setId(id);
+        merchant.setSoldOut(soldOut);
         merchantDao.updateMerchantSoldOut(merchant);
     }
 }

@@ -34,13 +34,13 @@ public class MerchantController {
 
     @RequestMapping(value = "/updateMerchantAuditStatus")
     @ResponseBody
-    public void updateMerchantAuditStatus(Merchant merchant) {
-        merchantService.updateMerchantAuditStatus(merchant);
+    public void updateMerchantAuditStatus(int id, int auditStatus) {
+        merchantService.updateMerchantAuditStatus(id, auditStatus);
     }
 
     @RequestMapping(value = "/updateMerchantSoldOut")
     @ResponseBody
-    public void updateMerchantSoldOut(Merchant merchant) {
-        merchantService.updateMerchantSoldOut(merchant);
+    public void updateMerchantSoldOut(int id, int soldOut) {
+        merchantService.updateMerchantSoldOut(id, soldOut);
     }
 }
