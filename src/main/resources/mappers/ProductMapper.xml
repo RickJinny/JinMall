@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rick.jinmall.mapper.ProductMapper">
-
     <insert id="addProductType" parameterType="com.rick.jinmall.bean.product.ProductType">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
@@ -9,14 +8,20 @@
         insert into tb_product_type(product_type_name, product_type_desc, product_type_level, parent_id)
         value(#{productTypeName}, #{productTypeDesc}, #{productTypeLevel}, #{parentId})
     </insert>
-    <insert id="addProduct">
-
+    <insert id="addProduct" parameterType="com.rick.jinmall.bean.product.Product">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into tb_product(product_type_id, product_name, product_price, merchant_id, create_time, update_time,
+        audit_time, audit_status, stock_num, sell_num, product_img)
+        value(#{productTypeId}, #{productName}, #{productPrice}, #{merchantId}, #{createTime}, #{updateTime},
+        #{auditTime}, #{auditStatus}, #{stockNum}, #{sellNum}, #{productImg})
     </insert>
     <delete id="deleteProductTypeById" parameterType="int">
         delete from tb_product_type where id = #{id}
     </delete>
-    <delete id="deleteProductById">
-
+    <delete id="deleteProductById" parameterType="int">
+        delete from tb_product where id = #{id}
     </delete>
     <select id="getProductTypeById" parameterType="int" resultType="com.rick.jinmall.bean.product.ProductType">
         select * from tb_product_type where id = #{id}
@@ -28,14 +33,15 @@
         update tb_product_type set product_type_name = #{productTypeName},
         product_type_desc=#{productTypeDesc} where id=#{id}
     </update>
-    <update id="auditProduct">
-
+    <update id="auditProduct" parameterType="com.rick.jinmall.bean.product.Product">
+        update tb_product set audit_time = #{auditTime}, audit_status = #{auditStatus} where id = #{id}
     </update>
-    <update id="updateProduct">
-
+    <update id="updateProduct" parameterType="com.rick.jinmall.bean.product.Product">
+        update tb_product set product_type_id = #{productTypeId}, product_name = #{productName}, product_price = #{productPrice},
+        stock_num = #{stockNum}, product_img = #{productImg} where id = #{id}
     </update>
-    <update id="updateProductByStatus">
-
+    <update id="updateProductByStatus" parameterType="com.rick.jinmall.bean.product.Product">
+        update tb_product set audit_status = #{auditStatus} where id = #{id}
     </update>
     <select id="queryListByProductVo" parameterType="com.rick.jinmall.bean.product.ProductType"
             resultType="com.rick.jinmall.bean.product.ProductType">
@@ -45,14 +51,43 @@
         </where>
     </select>
     <select id="getProductById" resultType="com.rick.jinmall.bean.product.Product">
-
+        select * from tb_product where id = #{id}
     </select>
-    <select id="queryProductByVo" resultType="com.rick.jinmall.bean.product.Product">
-
+    <select id="queryProductByVo" parameterType="com.rick.jinmall.bean.product.ProductVo"
+            resultType="com.rick.jinmall.bean.product.Product">
+        select * from tb_product
+        <where>
+            <include refid="customQueryProductByVoSQL"/>
+        </where>
     </select>
-    <select id="queryProductByIds" resultType="com.rick.jinmall.bean.product.Product">
 
+    <sql id="customQueryProductByVoSQL" >
+        <if test="customProduct != null">
+            <if test="customProduct.productTypeId != null and customProduct.productTypeId != ''">
+                and product_type_id = "${customProduct.productTypeId}"
+            </if>
+            <if test="customProduct.productName != null and customProduct.productName != '' ">
+                and product_name = "${customProduct.productName}"
+            </if>
+            <if test="customProduct.productPrice != null and customProduct.productPrice != '' ">
+                and product_price = "${customProduct.productPrice}"
+            </if>
+            <if test="customProduct.merchantId != null and customProduct.merchantId != '' ">
+                and merchant_id = "${customProduct.merchantId}"
+            </if>
+        </if>
+    </sql>
+
+    <select id="queryProductByIds" parameterType="map" resultType="com.rick.jinmall.bean.product.Product">
+        select * from tb_product where 1 = 2
+        <if test="ids != null and ids != ''">
+            or id IN
+            <foreach collection="ids" item="idItem" index="index" open="(" close=")" separator=",">
+                #{idItem}
+            </foreach>
+        </if>
     </select>
+
     <sql id="customSQL" >
         <if test="customProductType != null">
             <if test="customProductType.productTypeName != null and customProductType.productTypeName != ''">
