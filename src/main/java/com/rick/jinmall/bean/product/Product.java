@@ -2,11 +2,13 @@ package com.rick.jinmall.bean.product;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class Product {
 
     // 商品id
-    private Long id;
+    private Integer id;
 
     // 商品类型id
     private Integer productTypeId;
@@ -21,13 +23,13 @@ public class Product {
     private Integer merchantId;
 
     // 创建时间
-    private String createTime;
+    private Date createTime;
 
     // 更新时间
-    private String updateTime;
+    private Date updateTime;
 
     // 审核时间
-    private String auditTime;
+    private Date auditTime;
 
     // 审核状态
     private Integer auditStatus;

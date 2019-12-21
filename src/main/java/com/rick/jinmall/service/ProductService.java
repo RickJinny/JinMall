@@ -23,7 +23,7 @@ public interface ProductService {
 
     void addProduct(Product product);
 
-    void auditProduct(Product product);
+    void auditProduct(int id, int auditStatus);
 
     Product getProductById(int id);
 
@@ -33,7 +33,7 @@ public interface ProductService {
 
     List<Product> queryProductByVo(ProductVo productVo);
 
-    void updateProductByStatus(Product product);
+    void updateProductByStatus(int id, int auditStatus);
 
-    List<Product> queryProductByIds(List<String> ids);
+    List<Product> queryProductByIds(String keyWord);
 }
