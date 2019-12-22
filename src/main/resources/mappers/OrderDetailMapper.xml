@@ -3,5 +3,5 @@
 <mapper namespace="com.rick.jinmall.mapper.OrderDetailMapper">
 
     <insert id="addOrderDetail"></insert>
-    
+
 </mapper>
