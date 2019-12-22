@@ -9,7 +9,7 @@ public class OrderDetail {
     // id
     private Long id;
     // 订单id
-    private Long orderId;
+    private Integer orderId;
     // 商品id
     private Long productId;
     // 商家id
