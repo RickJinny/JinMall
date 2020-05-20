@@ -5,6 +5,7 @@ import com.rick.jinmall.seckill.mapper.ItemKillSuccessMapper;
 import com.rick.jinmall.seckill.model.ItemKill;
 import com.rick.jinmall.seckill.model.ItemKillSuccess;
 import com.rick.jinmall.seckill.model.SysConstant;
+import com.rick.jinmall.seckill.mq.RabbitSenderService;
 import com.rick.jinmall.seckill.service.KillService;
 import com.rick.jinmall.seckill.utils.SnowFlake;
 import org.slf4j.Logger;
@@ -26,6 +27,9 @@ public class KillServiceImpl implements KillService {
 
     @Autowired
     private ItemKillMapper itemKillMapper;
+
+    @Autowired
+    private RabbitSenderService rabbitSenderService;
 
     @Override
     public Boolean killItem(Integer killId, Integer userId) throws Exception {
@@ -88,7 +92,10 @@ public class KillServiceImpl implements KillService {
         if (itemKillSuccessMapper.countByKillUserId(itemKill.getId(), userId) <= 0) {
             int res = itemKillSuccessMapper.insertSelective(itemKillSuccess);
             if (res > 0) {
-
+                // 进行异步邮件消息的通知，使用 RabbitMQ
+                rabbitSenderService.sendKillSuccessEmailMsg(orderId);
+                // 入死信队列，用于 "失效" 超过指定的 TTL 时间时仍然未支付的订单
+                rabbitSenderService.sendKillSuccessOrderExpireMsg(orderId);
             }
         }
     }
