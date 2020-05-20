@@ -14,19 +14,19 @@
     id, item_id, total, start_time, end_time, is_active, create_time
   </sql>
 
-  <!--查询待秒杀的活动商品列表-->
+  <!-- 查询待秒杀的活动商品列表 -->
   <select id="selectAll" resultType="com.rick.jinmall.seckill.model.ItemKill">
-    SELECT
+    select
       a.*,
-      b.name AS itemName,
+      b.name as itemName,
       (
-        CASE WHEN (now() BETWEEN a.start_time AND a.end_time AND a.total > 0)
-          THEN 1
-        ELSE 0
-        END
-      )      AS canKill
-    FROM item_kill AS a LEFT JOIN item AS b ON b.id = a.item_id
-    WHERE a.is_active = 1
+        case when (now() between a.start_time and a.end_time and a.total > 0)
+          then 1
+        else 0
+        end
+      ) as canKill
+    from item_kill as a left JOIN item as b on b.id = a.item_id
+    where a.is_active = 1;
   </select>
 
   <!--获取秒杀详情-->
