@@ -55,8 +55,26 @@ public class KillServiceImpl implements KillService {
     }
 
     @Override
-    public Boolean killItemV2(Integer killId, Integer userId) {
-        return null;
+    public Boolean killItemV2(Integer killId, Integer userId) throws Exception {
+        Boolean result = false;
+        // 判断当前用户是否已经抢购过当前的商品
+        if (itemKillSuccessMapper.countByKillUserId(killId, userId) <= 0) {
+            // 查询待秒杀商品详情
+            ItemKill itemKill = itemKillMapper.selectByIdV2(killId);
+            // 判断是否可以被秒杀
+            if (itemKill != null && 1 == itemKill.getCanKill() && itemKill.getTotal() > 0) {
+                // 扣减库存，减 1
+                int res = itemKillMapper.updateKillItem(killId);
+                // 扣减是否成功？成功：生成秒杀成功的订单, 同时通知用户秒杀成功的消息
+                if (res > 0) {
+                    commonRecordKillSuccessInfo(itemKill, userId);
+                    result = true;
+                }
+            }
+        } else {
+            throw new Exception("您已经抢购过该商品了");
+        }
+        return result;
     }
 
     @Override
