@@ -1,6 +1,5 @@
 package com.rick.jinmall.seckill.mq;
 
-
 import com.rick.jinmall.seckill.mapper.ItemKillSuccessMapper;
 import com.rick.jinmall.seckill.model.ItemKillSuccess;
 import com.rick.jinmall.seckill.model.KillSuccessUserInfo;
