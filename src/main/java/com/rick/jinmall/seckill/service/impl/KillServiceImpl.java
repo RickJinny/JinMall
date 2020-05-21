@@ -9,6 +9,8 @@ import com.rick.jinmall.seckill.mq.RabbitSenderService;
 import com.rick.jinmall.seckill.service.KillService;
 import com.rick.jinmall.seckill.utils.RandomUtil;
 import com.rick.jinmall.seckill.utils.SnowFlake;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,9 @@ public class KillServiceImpl implements KillService {
 
     @Autowired
     private StringRedisTemplate redisTemplate;
+
+    @Autowired
+    private RedissonClient redissonClient;
 
     @Override
     public Boolean killItem(Integer killId, Integer userId) throws Exception {
@@ -135,9 +140,43 @@ public class KillServiceImpl implements KillService {
         return result;
     }
 
+    /**
+     * 使用 Redisson 
+     */
     @Override
-    public Boolean killItemV4(Integer killId, Integer userId) {
-        return null;
+    public Boolean killItemV4(Integer killId, Integer userId) throws Exception {
+        Boolean result = false;
+        String key = new StringBuffer().append(killId).append(userId).append("-RedissonLock").toString();
+        RLock rLock = redissonClient.getLock(key);
+        try {
+            Boolean cacheRes = rLock.tryLock(30, 10, TimeUnit.SECONDS);
+            if (cacheRes) {
+                // 执行核心业务逻辑
+                // 判断当前用户是否已经抢购过当前的商品
+                if (itemKillSuccessMapper.countByKillUserId(killId, userId) <= 0) {
+                    // 查询待秒杀商品详情
+                    ItemKill itemKill = itemKillMapper.selectByIdV2(killId);
+                    // 判断是否可以被秒杀
+                    if (itemKill != null && 1 == itemKill.getCanKill() && itemKill.getTotal() > 0) {
+                        // 扣减库存，减 1
+                        int res = itemKillMapper.updateKillItem(killId);
+                        // 扣减是否成功？成功：生成秒杀成功的订单, 同时通知用户秒杀成功的消息
+                        if (res > 0) {
+                            commonRecordKillSuccessInfo(itemKill, userId);
+                            result = true;
+                        }
+                    }
+                } else {
+                    throw new Exception("您已经抢购过该商品了");
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            rLock.unlock();
+        }
+        return result;
     }
 
     @Override
